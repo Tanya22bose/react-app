@@ -1,3 +1,12 @@
+Here's the demo or the preview of the Custom Input with different input types.
+
+
+
+https://github.com/Tanya22bose/tech-curve-assignment/assets/65502480/da66306f-cbbc-4650-8819-c911800ad9aa
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
