@@ -47,11 +47,8 @@ const labelStyle = {
 const optionStyle = {
   padding: "8px",
   fontSize: "16px",
-  border: "1px solid #ccc",
   borderRadius: "4px",
   width: "210px",
-  backgroundColor: "#fff",
-  color: "#333",
   cursor: "pointer",
   outline: "none",
 };

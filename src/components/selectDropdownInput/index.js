@@ -29,6 +29,7 @@ const SelectDropdownInput = (props) => {
       >
         <select
           style={optionStyle}
+          className={hasError ? "warning" : "success"}
           disabled={disable}
           value={commonInputValue}
           onChange={(e) => customOnChange(e.target.value, setInputValue)}
