@@ -1,118 +1,155 @@
-import { useState } from "react";
+import React from "react";
 import "./App.css";
-import CustomInput from "./components/customInput";
+import { radioButtonOptions, selectOptions } from "./utils/constants";
+import { handleInputChange, onBlurSaveInput } from "./utils/helper";
+import CustomInput from "./components/customInput/index";
+
+/*
+   App : renders input type - text, number, selectDropdown, password, currency, radio, checkbox using :
+
+   CustomInput component which accepts props: 
+   inputStyle - for custom input styles,
+   inputTitle - for label text, 
+   inputType - for input type,
+   labelStyle - for custom label style,
+   holder - for placeholder text,
+   required - boolean indicating whether its required,
+   disable - boolean indicating whether its disabled, 
+   minLength - minimum length for a text or minimum value in case of number, 
+   maxLength - maximum length for a text or maximum value in case of number, 
+   inputValue - for input value
+   customOnChange - for input on change handler, 
+   customOnBlur - for input on blur event, 
+   regexPattern - regex pattern to match against,
+   options - array of options for input type select, radio and checkbox,
+   optionStyle - custom style for options,
+
+*/
+
+const inputStyle = {
+  width: "200px",
+  height: "40px",
+  padding: "8px",
+  fontSize: "16px",
+  borderRadius: "4px",
+  boxShadow: "inset 0 1px 2px rgba(0,0,0,0.1)",
+  boxSizing: "border-box",
+  outline: "none",
+};
+
+const labelStyle = {
+  display: "block",
+  marginBottom: "12px",
+  fontSize: "14px",
+  color: "#333",
+};
+
+const optionStyle = {
+  padding: "8px",
+  fontSize: "16px",
+  border: "1px solid #ccc",
+  borderRadius: "4px",
+  width: "210px",
+  backgroundColor: "#fff",
+  color: "#333",
+  cursor: "pointer",
+  outline: "none",
+};
 
 function App() {
-  const [inputValue, setInputValue] = useState('hey there');
-  const [isDisable, setDisability] = useState(true);
-  const [errorMessage, setErrorMessage] = useState(false);
-  const [error, setError] = useState(false);
-  const [minLength, setMinLength] = useState(3);
-  const [maxLength, setMaxLength] = useState(16);
-
-  //set the new value entered by the user 
-  const setNewInput = (newInput) => {
-    setInputValue(newInput);
-  };
-
-  //validate input for different types of inputs
-  const validateInput = (value) => {
-    if (value.length < minLength || value.length > maxLength) {
-      setErrorMessage(
-        `value can not be less than ${minLength} and greater than ${maxLength}`
-      );
-      setError(true);
-    }
-  };
-
-  
   return (
-    <div className="App">
-      {/* input type text */}
+    <>
+      {/* Text Input Example */}
       <CustomInput
-        inputStyle={{ marginTop: "10px", height: "30px", padding: "10px" }}
-        inputTitle="Enter title text"
-        required={true}
-        disable={isDisable}
-        customChangeFunction={setInputValue}
+        inputStyle={inputStyle}
+        inputTitle="Text Input"
         inputType="text"
-        holder="please type your input.."
-        labelStyle={{ marginTop: "50px" }}
-        errorMessage={errorMessage}
-        error={error}
-        maxLength={maxLength}
-        minLength={minLength}
-        inputValue={inputValue}
-      />
-      {/* input type number */}
-      <CustomInput
-        inputStyle={{ marginTop: "10px", height: "30px", padding: "10px" }}
-        inputTitle="Input Number"
-        required={false}
+        labelStyle={labelStyle}
+        holder="Enter text..."
+        required={true}
         disable={false}
-        customChangeFunction={setInputValue}
+        minLength={3}
+        maxLength={10}
+        inputValue={"hey there!"}
+        customOnChange={handleInputChange}
+        customOnBlur={onBlurSaveInput}
+      />
+      {/* Number Input Example */}
+      <CustomInput
+        inputStyle={inputStyle}
+        inputTitle="Number Input"
         inputType="number"
-        holder="please type your input.."
-        labelStyle={{ marginTop: "50px" }}
-        errorMessage={errorMessage}
-        error={error}
-        maxLength={maxLength}
-        minLength={minLength}
-        inputValue={inputValue}
+        labelStyle={labelStyle}
+        holder="Enter number..."
+        required={true}
+        disable={false}
+        minLength={3}
+        maxLength={10}
+        inputValue={10}
+        customOnChange={handleInputChange}
+        customOnBlur={onBlurSaveInput}
       />
-      {/* input type select */}
+      {/* Select Input Example*/}
       <CustomInput
-        inputStyle={{ marginTop: "10px", height: "30px", padding: "10px" }}
-        inputTitle="Select Dropdown"
-        required={false}
-        disable={!isDisable}
-        customChangeFunction={setInputValue}
-        inputType={"select"}
-        holder="please type your input.."
-        labelStyle={{ marginTop: "50px" }}
-        errorMessage={errorMessage}
-        error={error}
-        options={[
-          { label: "option1", value: "option1" },
-          { label: "option2", value: "option2" },
-        ]}
-        maxLength={maxLength}
-        minLength={minLength}
-        inputValue={inputValue}
+        inputTitle="Select Input"
+        inputType="select"
+        labelStyle={labelStyle}
+        options={selectOptions}
+        optionStyle={optionStyle}
+        required={true}
+        customOnChange={handleInputChange}
+        customOnBlur={onBlurSaveInput}
       />
-      {/* input type password */}
+      {/* Radio Input Example */}
       <CustomInput
-        inputStyle={{ marginTop: "10px", height: "30px", padding: "10px" }}
-        inputTitle="Custom Password"
-        required={false}
-        disable={isDisable}
-        customChangeFunction={setInputValue}
+        optionStyle={{ display: "flex", flexDirection: "column" }}
+        inputTitle="Radio Input"
+        inputType="radio"
+        labelStyle={labelStyle}
+        options={radioButtonOptions}
+        customOnChange={handleInputChange}
+        customOnBlur={onBlurSaveInput}
+      />
+      {/* Checkbox Input Example */}
+      <CustomInput
+        optionStyle={{ display: "flex", flexDirection: "column" }}
+        inputTitle="Checkbox Input"
+        inputType="checkbox"
+        labelStyle={labelStyle}
+        options={radioButtonOptions}
+        customOnChange={handleInputChange}
+        customOnBlur={onBlurSaveInput}
+      />
+      {/* Password Input Example */}
+      <CustomInput
+        inputStyle={inputStyle}
+        inputTitle="Password Input"
         inputType="password"
-        holder="please type your input.."
-        labelStyle={{ marginTop: "50px" }}
-        errorMessage={errorMessage}
-        error={error}
-        maxLength={maxLength}
-        minLength={minLength}
-        inputValue={inputValue}
+        holder="Enter password..."
+        labelStyle={labelStyle}
+        required={true}
+        minLength={8}
+        maxLength={128}
+        regexPattern={/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/}
+        customOnChange={handleInputChange}
+        customOnBlur={onBlurSaveInput}
       />
-      {/* input type currency */}
+      {/* Currency Input Example */}
       <CustomInput
-        inputStyle={{ marginTop: "10px", height: "30px", padding: "10px" }}
+        inputStyle={inputStyle}
         inputTitle="Currency Input"
-        required={false}
-        disable={isDisable}
-        customChangeFunction={setInputValue}
-        inputType="currency"
-        holder="please type your input.."
-        labelStyle={{ marginTop: "50px" }}
-        errorMessage={errorMessage}
-        error={error}
-        maxLength={maxLength}
-        minLength={minLength}
-        inputValue={inputValue}
+        inputType="number"
+        holder="0.00"
+        minLength={1}
+        maxLength={9999999999999.99}
+        labelStyle={labelStyle}
+        regexPattern={/^\d+(\.\d{1,2})?$/}
+        inputValue={10.5}
+        disable={true}
+        customOnChange={handleInputChange}
+        customOnBlur={onBlurSaveInput}
       />
-    </div>
+    </>
   );
 }
 
