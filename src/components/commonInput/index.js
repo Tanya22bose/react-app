@@ -18,6 +18,7 @@ import { SelectOption } from "../selectDropdownInput";
 
 const CommonInput = (props) => {
   const {
+    inputTitle,
     inputValue,
     inputType,
     inputStyle,
@@ -28,7 +29,7 @@ const CommonInput = (props) => {
     minLength,
     maxLength,
     regexPattern,
-    disable
+    disable,
   } = props;
   const [hasError, setError] = useState(false);
   const [errorMessage, setErrorMsg] = useState("");
@@ -38,8 +39,8 @@ const CommonInput = (props) => {
     <>
       <div>
         <RenderCurrencyAnnnotation
-          isCurrency={props.inputTitle === "Currency Input"}
-          disabled={props.disable}
+          isCurrency={inputTitle === "Currency Input"}
+          disabled={disable}
         />
         <input
           type={inputType}
@@ -73,7 +74,7 @@ const RenderCurrencyAnnnotation = ({ isCurrency, disabled }) => {
     return (
       <select className="currency-dropdown-style" disabled={disabled}>
         {currencies?.map((option, idx) => (
-          <SelectOption value={option} label={option} key={idx}/>
+          <SelectOption value={option} label={option} key={idx} />
         ))}
       </select>
     );

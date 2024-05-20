@@ -21,15 +21,17 @@ const SelectDropdownInput = (props) => {
   const [errorMessage, setErrorMsg] = useState("");
   const [hasError, setError] = useState(false);
 
+  const appendWarningClass = hasError ? "warning" : "success"
+
   return (
     <>
       <div
-        className={hasError ? "warning" : "success"}
+        className={appendWarningClass}
         style={{ borderRadius: "5px" }}
       >
         <select
           style={optionStyle}
-          className={hasError ? "warning" : "success"}
+          className={appendWarningClass}
           disabled={disable}
           value={commonInputValue}
           onChange={(e) => customOnChange(e.target.value, setInputValue)}

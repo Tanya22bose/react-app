@@ -17,7 +17,7 @@ const RadioCheckboxInput = (props) => {
   return (
     <div style={props.optionStyle}>
       {radioButtonInput?.map((option) => (
-        <Option
+        <ButtonOption
           option={option}
           setSelectedValue={setSelectedValue}
           selectedValue={selectedValue}
@@ -28,7 +28,7 @@ const RadioCheckboxInput = (props) => {
   );
 };
 
-const Option = ({
+const ButtonOption = ({
   inputType,
   disable,
   selectedValue,
